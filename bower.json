@@ -1,6 +1,6 @@
 {
   "name": "select-css-lachieh",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Cross-browser CSS for consistent select element styling.",
   "main": "src/select-css.css",
   "authors": [
