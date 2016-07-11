@@ -1,10 +1,11 @@
 {
-  "name": "fg-select-css",
+  "name": "select-css-lachieh",
   "version": "1.0.3",
   "description": "Cross-browser CSS for consistent select element styling.",
   "main": "src/select-css.css",
   "authors": [
-    "zachleat <zachleatherman@gmail.com> (http://zachleat.com/)"
+    "zachleat <zachleatherman@gmail.com> (http://zachleat.com/)",
+    "lachieh <lachlan@heywood.net.au>"
   ],
   "license": "MIT",
   "ignore": [
