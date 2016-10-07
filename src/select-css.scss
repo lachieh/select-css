@@ -1,83 +1,87 @@
-/* Container used for styling the custom select, the buttom class below adds the bg gradient, corners, etc. */
+//Container used for styling the custom select, the buttom class below adds the bg gradient, corners, etc.
 .form-field--select {
-	position: relative;
-	display: block;
+  display: block;
+  position: relative;
 
-  /* This is the native select, we're making everything but the text invisible so we can see the button styles in the wrapper */
+  // This is the native select, we're making everything but the text invisible so we can see the button styles in the wrapper
   select {
-  	width: 100%;
-  	margin: 0;
-  	outline: none;
-  	padding: .6em .8em .5em .8em;
-  	box-sizing: border-box;
-  	font-size: 16px; /* Font size must be 16px to prevent iOS page zoom on focus */
+    box-sizing: border-box;
+    font-size: 16px; // Font size must be 16px to prevent iOS page zoom on focus
+    margin: 0;
+    outline: none;
+    padding: .6em .8em .5em;
+    width: 100%;
   }
 
-  /* Custom arrow sits on top of the select - could be an image, SVG, icon font, etc. or the arrow could just baked into the bg image on the select. */
+  // Custom arrow sits on top of the select - could be an image, SVG, icon font, etc. or the arrow could just baked into the bg image on the select.
   &::after {
-  	content: " ";
-  	position: absolute;
-  	top: 50%;
-  	right: 1em;
-  	z-index: 2;
-  	/* These hacks make the select behind the arrow clickable in some browsers */
-  	pointer-events: none;
-  	display: none;
+    content: '';
+    position: absolute;
+    right: 1em;
+    top: 50%;
+    z-index: 2;
+    //These hacks make the select behind the arrow clickable in some browsers
+    pointer-events: none;
+    display: none;
   }
 
-  /* Firefox focus has odd artifacts around the text, this kills that. See https://developer.mozilla.org/en-US/docs/Web/CSS/:-moz-focusring */
+  //Firefox focus has odd artifacts around the text, this kills that. See https://developer.mozilla.org/en-US/docs/Web/CSS/:-moz-focusring
   select:-moz-focusring {
     color: transparent;
     text-shadow: 0 0 0 #000;
   }
 }
-/* @supports ( -moz-appearance: none ) and ( mask-type: alpha ) is Firefox 35+ */
-@supports ( -moz-appearance: none ) and ( mask-type: alpha ) {
+
+@supports ( -webkit-appearance: none ) or ( appearance: none ) or
+          //Firefox <= 34 has a false positive on @supports( -moz-appearance: none )
+          //@supports ( mask-type: alpha ) is Firefox 35+
+          (( -moz-appearance: none ) and ( mask-type: alpha )) {
 
   .form-field--select {
-  	/* Show custom arrow */
-  	&::after {
-  		display: block;
-  	}
+  	//Show custom arrow
+    &::after {
+      display: block;
+    }
 
-  	/* Remove select styling */
-  	select {
-  		padding-right: 2em; /* Match-01 */
-  		/* inside @supports so that iOS <= 8 display the native arrow */
-  		background: none; /* Match-04 */
-  		/* inside @supports so that Android <= 4.3 display the native arrow */
-  		border: 1px solid transparent; /* Match-05 */
+    //Remove select styling
+    select {
+      appearance: none;
+      //inside @supports so that iOS <= 8 display the native arrow
+      background: none; //Match-04
+      //inside @supports so that Android <= 4.3 display the native arrow
+      border: 1px solid transparent; //Match-05
+      padding-right: 2em; //Match-01
+    }
 
-  		-webkit-appearance: none;
-  		-moz-appearance: none;
-  		appearance: none;
-  	}
-
-  	select:focus {
-  		border-color: #aaa; /* Match-03 */
-  	}
+    select:focus {
+      border-color: #aaa; //Match-03
+    }
   }
 }
 
-/* IE 10/11+ - This hides native dropdown button arrow so it will have the custom appearance. Targeting media query hack via http://browserhacks.com/#hack-28f493d247a12ab654f6c3637f6978d5 - looking for better ways to achieve this targeting */
-/* The second rule removes the odd blue bg color behind the text in the select button in IE 10/11 and sets the text color to match the focus style's - fix via http://stackoverflow.com/questions/17553300/change-ie-background-color-on-unopened-focused-select-box */
+//IE 10/11+ - This hides native dropdown button arrow so it will have the custom appearance. Targeting media query hack via http://browserhacks.com/#hack-28f493d247a12ab654f6c3637f6978d5 - looking for better ways to achieve this targeting
+//The second rule removes the odd blue bg color behind the text in the select button in IE 10/11 and sets the text color to match the focus style's - fix via http://stackoverflow.com/questions/17553300/change-ie-background-color-on-unopened-focused-select-box
 @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
   .form-field--select {
     select::-ms-expand {
       display: none;
     }
+
     select:focus {
-      border-color: #aaa; /* Match-03 */
+      border-color: #aaa; //Match-03
     }
+
     select:focus::-ms-value {
       background: transparent;
-      color: #222; /* Match-02*/
+      color: #222; //Match-02*/
     }
+
     select {
-      padding-right: 2em; /* Match-01 */
-      background: none; /* Match-04 */
-      border: 1px solid transparent; /* Match-05 */
+      background: none; //Match-04
+      border: 1px solid transparent; //Match-05
+      padding-right: 2em; //Match-01
     }
+
     &::after {
       display: block;
     }
