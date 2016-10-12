@@ -32,9 +32,9 @@
   }
 }
 
+//Firefox <= 34 has a false positive on @supports( -moz-appearance: none )
+//@supports ( mask-type: alpha ) is Firefox 35+
 @supports ( -webkit-appearance: none ) or ( appearance: none ) or
-          //Firefox <= 34 has a false positive on @supports( -moz-appearance: none )
-          //@supports ( mask-type: alpha ) is Firefox 35+
           (( -moz-appearance: none ) and ( mask-type: alpha )) {
 
   .form-field--select {
@@ -45,9 +45,12 @@
 
     //Remove select styling
     select {
-      appearance: none;
+      -webkit-appearance: none;
+         -moz-appearance: none;
+              appearance: none;
       //inside @supports so that iOS <= 8 display the native arrow
       background: none; //Match-04
+      background-color: none;
       //inside @supports so that Android <= 4.3 display the native arrow
       border: 1px solid transparent; //Match-05
       padding-right: 2em; //Match-01
