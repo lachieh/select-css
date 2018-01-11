@@ -1,11 +1,12 @@
 {
   "name": "select-css-lachieh",
-  "version": "1.1.3",
+  "version": "1.1.5",
   "description": "Cross-browser CSS for consistent select element styling.",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/lachieh/select-css.git"
   },
+  "main": "src/select-css.scss",
   "authors": [
     "zachleat <zachleatherman@gmail.com> (http://zachleat.com/)",
     "lachieh <lachlan@heywood.net.au>"
